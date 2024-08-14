@@ -338,10 +338,17 @@ gameCell playerMove(gameCell graph, int& gongsLeft){
 
   //Validation loop to ensure proper input on the user for their next move
   while(valid == false){
-    cout << "Enter next cell (row & col): ";
+    cout << "Enter next cell (row number followed by column number with a space between): ";
     cin >> row;
     cout << " ";
     cin >> column;
+
+    //In case input is not a number, this prevents cin from breaking.
+    if(cin.fail()){
+      cout << "Invalid input... Please enter integers as whole numbers." << endl;
+      cin.clear();
+      cin.ignore(std::numeric_limits<std::streamsize>::max(), '\n');
+    }
 
     //Input cannot be below 0 or above 4
     if(row < 0 || row > 4 || column < 0 || column > 4){
